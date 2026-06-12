@@ -31,7 +31,12 @@ Decimal phases appear between their surrounding integers in numeric order.
   3. A registered user (mahasiswa, or a seeded pustakawan account) can log in and receive a JWT valid for 1 hour, landing on a role-appropriate authenticated view
   4. Calling a protected API endpoint without a token, or with an expired/invalid token, returns 401 Unauthorized
   5. The login page and authenticated shell render correctly down to 375px width, and a sample API call completes in under 2 seconds
-**Plans**: TBD
+**Plans**: 4 plans
+Plans:
+- [ ] 01-01-PLAN.md — Backend skeleton: complete schema + Alembic migration + seed + RED auth tests
+- [ ] 01-02-PLAN.md — Auth API: bcrypt + JWT, registrasi/masuk/saya, 401 enforcement (tests GREEN)
+- [ ] 01-03-PLAN.md — Frontend skeleton: Vite/React/router/Tailwind + auth UI + shell + 401 interceptor
+- [ ] 01-04-PLAN.md — docker-compose orchestration (DEPLOY-01) + manual smoke (NFR-01, NFR-02)
 **UI hint**: yes
 
 ### Phase 2: Book Catalog
@@ -93,7 +98,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. Foundation, Schema & Auth | 0/TBD | Not started | - |
+| 1. Foundation, Schema & Auth | 0/4 | Not started | - |
 | 2. Book Catalog | 0/TBD | Not started | - |
 | 3. Loan Request & Approval Workflow | 0/TBD | Not started | - |
 | 4. Returns, Fines & Blocking | 0/TBD | Not started | - |
