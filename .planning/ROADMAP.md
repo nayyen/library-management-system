@@ -13,7 +13,7 @@ Biblio replaces a manual spreadsheet-based library process with a FastAPI + Reac
 
 Decimal phases appear between their surrounding integers in numeric order.
 
-- [ ] **Phase 1: Foundation, Schema & Auth** - Scaffolding, docker-compose, full DB schema, and working registration/login with JWT
+- [x] **Phase 1: Foundation, Schema & Auth** - Scaffolding, docker-compose, full DB schema, and working registration/login with JWT
 - [ ] **Phase 2: Book Catalog** - Mahasiswa can search/filter books; pustakawan can manage master books and physical copies
 - [ ] **Phase 3: Loan Request & Approval Workflow** - Mahasiswa can request loans; pustakawan approves/rejects, manages pickup window and handover
 - [ ] **Phase 4: Returns, Fines & Blocking** - Pustakawan processes returns, system calculates fines, blocks accounts, logs overdue notifications, and clears fines
@@ -38,19 +38,19 @@ Decimal phases appear between their surrounding integers in numeric order.
 **Plans**: 4 plansPlans:
 **Wave 1**
 
-- [ ] 01-01-PLAN.md — Backend skeleton: complete schema + Alembic migration + seed + RED auth tests
+- [x] 01-01-PLAN.md — Backend skeleton: complete schema + Alembic migration + seed + RED auth tests
 
 **Wave 2** *(blocked on Wave 1 completion)*
 
-- [ ] 01-02-PLAN.md — Auth API: bcrypt + JWT, registrasi/masuk/saya, 401 enforcement (tests GREEN)
+- [x] 01-02-PLAN.md — Auth API: bcrypt + JWT, registrasi/masuk/saya, 401 enforcement (tests GREEN)
 
 **Wave 3** *(blocked on Wave 2 completion)*
 
-- [ ] 01-03-PLAN.md — Frontend skeleton: Vite/React/router/Tailwind + auth UI + shell + 401 interceptor
+- [x] 01-03-PLAN.md — Frontend skeleton: Vite/React/router/Tailwind + auth UI + shell + 401 interceptor
 
 **Wave 4** *(blocked on Wave 3 completion)*
 
-- [ ] 01-04-PLAN.md — docker-compose orchestration (DEPLOY-01) + manual smoke (NFR-01, NFR-02)
+- [x] 01-04-PLAN.md — docker-compose orchestration (DEPLOY-01) + manual smoke (NFR-01, NFR-02)
 
 **UI hint**: yes
 
@@ -125,7 +125,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. Foundation, Schema & Auth | 0/4 | Not started | - |
+| 1. Foundation, Schema & Auth | 4/4 | ✅ Complete | 2026-06-12 |
 | 2. Book Catalog | 0/TBD | Not started | - |
 | 3. Loan Request & Approval Workflow | 0/TBD | Not started | - |
 | 4. Returns, Fines & Blocking | 0/TBD | Not started | - |
