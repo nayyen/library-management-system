@@ -1,9 +1,12 @@
 import { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router';
 import api from '../lib/api';
+import { getToken, decodeToken } from '../lib/auth';
 import BookCoverPlaceholder from '../components/BookCoverPlaceholder';
 import AvailabilityBadge from '../components/AvailabilityBadge';
 import SalinanTable from '../components/SalinanTable';
+import BookFormModal from '../components/BookFormModal';
+import TambahSalinanForm from '../components/TambahSalinanForm';
 
 export default function BukuDetailPage() {
   const { id } = useParams();
@@ -11,33 +14,52 @@ export default function BukuDetailPage() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
 
+  // Role
+  const token = getToken();
+  const decoded = token ? decodeToken(token) : null;
+  const peran = decoded?.peran ?? 'mahasiswa';
+
+  // Edit modal
+  const [showEditModal, setShowEditModal] = useState(false);
+  const [categories, setCategories] = useState([]);
+  const [refreshKey, setRefreshKey] = useState(0);
+
+  // Fetch categories once for edit modal datalist
   useEffect(() => {
-    let cancelled = false;
+    if (peran === 'pustakawan') {
+      api
+        .get('/buku/kategori')
+        .then((res) => setCategories(res.data))
+        .catch(() => {});
+    }
+  }, [peran]);
+
+  useEffect(() => {
+    const abortController = new AbortController();
+
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setLoading(true);
     setError('');
 
     api
-      .get(`/buku/${id}`)
+      .get(`/buku/${id}`, { signal: abortController.signal })
       .then((res) => {
-        if (!cancelled) setBuku(res.data);
+        if (!abortController.signal.aborted) setBuku(res.data);
       })
       .catch((err) => {
-        if (!cancelled) {
-          setError(
-            err.response?.status === 404
-              ? 'Buku tidak ditemukan.'
-              : 'Gagal memuat detail buku.',
-          );
+        if (abortController.signal.aborted) return;
+        if (err.response?.status === 404) {
+          setError('Buku tidak ditemukan.');
+        } else {
+          setError('Gagal memuat detail buku.');
         }
       })
       .finally(() => {
-        if (!cancelled) setLoading(false);
+        if (!abortController.signal.aborted) setLoading(false);
       });
 
-    return () => {
-      cancelled = true;
-    };
-  }, [id]);
+    return () => abortController.abort();
+  }, [id, refreshKey]);
 
   if (loading) {
     return (
@@ -106,6 +128,17 @@ export default function BukuDetailPage() {
               {buku.judul}
             </h1>
             <AvailabilityBadge tersedia={buku.tersedia} />
+            {peran === 'pustakawan' && (
+              <button
+                type="button"
+                onClick={() => setShowEditModal(true)}
+                className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full text-label-sm font-label-sm text-outline border border-outline-variant hover:bg-surface-container transition-colors"
+                aria-label={`Edit ${buku.judul}`}
+              >
+                <span className="material-symbols-outlined text-[18px]">edit</span>
+                Edit
+              </button>
+            )}
           </div>
 
           <p className="text-body-lg font-body-lg text-outline">
@@ -149,6 +182,35 @@ export default function BukuDetailPage() {
         </h2>
         <SalinanTable salinan={buku.salinan} />
       </section>
+
+      {/* Pustakawan: Tambah Salinan form */}
+      {peran === 'pustakawan' && (
+        <TambahSalinanForm
+          idBuku={buku.id}
+          onAdded={(newSalinan) => {
+            setBuku((prev) => ({
+              ...prev,
+              salinan: [...prev.salinan, newSalinan],
+              tersedia:
+                newSalinan.status_ketersediaan === 'tersedia' || prev.tersedia,
+            }));
+          }}
+        />
+      )}
+
+      {/* Pustakawan: Edit modal */}
+      {showEditModal && (
+        <BookFormModal
+          mode="edit"
+          buku={buku}
+          categories={categories}
+          onClose={() => setShowEditModal(false)}
+          onSaved={() => {
+            setShowEditModal(false);
+            setRefreshKey((k) => k + 1);
+          }}
+        />
+      )}
     </div>
   );
 }
