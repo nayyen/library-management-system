@@ -3,8 +3,8 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: executing
-stopped_at: Phase 2 context gathered
-last_updated: "2026-06-13T02:31:22.709Z"
+stopped_at: Phase 02 UI-SPEC approved
+last_updated: "2026-06-13T03:12:25.386Z"
 last_activity: 2026-06-13 — Phase 1 shipped to phase-1-foundation branch — UAT 11/11 passed
 progress:
   total_phases: 5
@@ -71,6 +71,7 @@ None yet.
 
 - [Phase 3]: LOAN-05 (2x24h pickup auto-cancellation) requires a time-based check — confirm during planning whether this is a scheduled job, a lazy check-on-read, or both, since the project has no background worker yet.
 - [Phase 4]: RET-03 (Brevo notification stub) needs a defined "logged" format (e.g., structured log line or DB table) for verification — clarify during Phase 4 planning.
+- [Phase 2 — override]: Decision Coverage Gate flagged D-01, D-03, D-08, D-09, D-10, D-14, D-15 as not literally cited by `D-NN:` ID in any plan's `must_haves`/`truths`. The plan-checker confirmed all are substantively implemented in plan tasks (D-01 Kelola tab in 02-04, D-08 debounced search in 02-01/02-02, D-09/D-10 category filter in 02-01/02-02, D-13/14/15 placeholder covers in 02-02, etc.) — user chose "Proceed anyway" since this is a citation/traceability gap, not a missing-feature gap. verify-phase should re-check these decisions against the shipped code.
 
 ## Deferred Items
 
@@ -82,6 +83,6 @@ Items acknowledged and carried forward from previous milestone close:
 
 ## Session Continuity
 
-Last session: 2026-06-13T02:31:22.604Z
-Stopped at: Phase 2 context gathered
-Resume file: .planning/phases/02-book-catalog/02-CONTEXT.md
+Last session: 2026-06-13T02:49:39.299Z
+Stopped at: Phase 02 UI-SPEC approved
+Resume file: .planning/phases/02-book-catalog/02-UI-SPEC.md
