@@ -67,7 +67,23 @@ Decimal phases appear between their surrounding integers in numeric order.
   3. A logged-in pustakawan can add, edit, and delete a master `buku` record, and the changes are immediately reflected in the catalog view
   4. A pustakawan can add a physical `salinan_buku` copy to a book, specifying `lokasi_rak`, `kondisi`, and `status_ketersediaan`, and the copy appears in that book's detail view
 
-**Plans**: TBD
+**Plans**: 4 plans
+
+Plans:
+
+**Wave 1**
+
+- [ ] 02-01-PLAN.md — Backend catalog read API (search/filter/category/detail) + seed + RED/GREEN tests
+
+**Wave 2** *(blocked on Wave 1)*
+
+- [ ] 02-02-PLAN.md — Mahasiswa frontend: browse grid, search/filter, detail view + Salinan table
+- [ ] 02-03-PLAN.md — Backend pustakawan CRUD (buku create/edit/delete, add salinan) + role-gate/FK tests
+
+**Wave 3** *(blocked on Wave 2)*
+
+- [ ] 02-04-PLAN.md — Pustakawan frontend: Kelola tab, add/edit modal, delete confirm, Tambah Salinan form
+
 **UI hint**: yes
 
 ### Phase 3: Loan Request & Approval Workflow
